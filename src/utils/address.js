@@ -19,9 +19,9 @@ const getCoordinatesFromAddress = (address, callback) => {
     } else {
       console.log(response.body.results[0].geometry.location.lat);
       callback(undefined, {
-        address: response.body.results[0].formatted_address,
-        latitude: response.body.results[0].geometry.location.lat,
-        longitude: response.body.results[0].geometry.location.lng,
+        // address: response.body.results[0].formatted_address,
+        lat: response.body.results[0].geometry.location.lat,
+        long: response.body.results[0].geometry.location.lng,
       });
     }
   });
