@@ -9,15 +9,15 @@ const getCoordinatesFromAddress = (address, callback) => {
     key;
 
   request({ url, json: true }, (error, response) => {
-      console.log(response.body.status)
+    //   console.log(response.body.status)
     if (error) {
       callback("Unable to connect to geocode server", undefined);
-      console.log("Unable to connect to geocode server");
+    //   console.log("Unable to connect to geocode server");
     } else if (response.body.results.length === 0) {
-      console.log("Unable to find location. Try another search");
+    //   console.log("Unable to find location. Try another search");
       callback("Unable to find location. Try another search", undefined);
     } else {
-      console.log(response.body.results[0].geometry.location.lat);
+    //   console.log(response.body.results[0].geometry.location.lat);
       callback(undefined, {
         // address: response.body.results[0].formatted_address,
         lat: response.body.results[0].geometry.location.lat,

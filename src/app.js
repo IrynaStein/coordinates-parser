@@ -1,36 +1,8 @@
 // const path = require('path')
 const getCoordinatesFromAddress = require("./utils/address");
-const getAddressFromCoordinates = require('./utils/coordinates')
+const getAddressFromCoordinates = require("./utils/coordinates");
 const express = require("express");
 const app = express();
-
-// app.get("", function (req, res) {
-//   console.log(req.query);
-//   //   const address = getCoordinatesFromAddress()
-//   if (!req.query.address && !req.query.coordinates) {
-//     return res.send("Location address or coordinates are required");
-//   }
-
-//   if (req.query.address) {
-//     console.log(req.query);
-//     getCoordinatesFromAddress(
-//       req.query.address,
-//       (error, { lat, long } = {}) => {
-//         if (error) {
-//           return res.send({ error: error });
-//         }
-//         res.send({
-//             // address,
-//             lat,
-//             long});
-//         console.log(lat, long)
-//       }
-//     );
-//     // res.send("Returning address");
-//   } else if (req.query.coordinates) {
-//     res.send("Returning coordinates");
-//   }
-// });
 
 app.get("/coordinates", (req, res) => {
   if (!req.query.address) {
@@ -48,14 +20,23 @@ app.get("/coordinates", (req, res) => {
   });
 });
 
-
 app.get("/address", (req, res) => {
-    if(!req.query.latlng){
-        return res.send("Coordinates are required")
+  if (!req.query.latlng) {
+    return res.send("Coordinates are required");
+  }
+
+  console.log(req.query.latlng);
+  getAddressFromCoordinates(req.query.latlng, (error, { address } = {}) => {
+      console.log(error)
+    if (error) {
+      return res.send({ error: error });
     }
 
-
-})
+    res.send({
+      address,
+    });
+  });
+});
 
 app.get("/*", (req, res) => {
   res.send("404 Page not found");
