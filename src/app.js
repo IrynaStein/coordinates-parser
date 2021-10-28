@@ -1,4 +1,3 @@
-// const path = require('path')
 const getCoordinatesFromAddress = require("./utils/address");
 const getAddressFromCoordinates = require("./utils/coordinates");
 const express = require("express");
@@ -24,14 +23,10 @@ app.get("/address", (req, res) => {
   if (!req.query.latlng) {
     return res.send("Coordinates are required");
   }
-
-  console.log(req.query.latlng);
   getAddressFromCoordinates(req.query.latlng, (error, { address } = {}) => {
-      console.log(error)
     if (error) {
       return res.send({ error: error });
     }
-
     res.send({
       address,
     });

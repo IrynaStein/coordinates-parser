@@ -14,7 +14,6 @@ const getAddressFromCoordinates = (coordinates, callback) => {
     } else if (response.body.results.length === 0) {
       callback("Unable to find location. Try another search", undefined);
     } else {
-        console.log("there are no errors")
       callback(undefined, {
         address: response.body.results[0].formatted_address,
       });
