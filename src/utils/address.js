@@ -20,7 +20,7 @@ const getCoordinatesFromAddress = (address, callback) => {
       console.log(response.body.results[0].geometry.location.lat);
       callback(undefined, {
         address: response.body.results[0].formatted_address,
-        lattitude: response.body.results[0].geometry.location.lat,
+        latitude: response.body.results[0].geometry.location.lat,
         longitude: response.body.results[0].geometry.location.lng,
       });
     }
