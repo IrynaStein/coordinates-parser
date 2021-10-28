@@ -7,12 +7,12 @@ const getCoordinatesFromAddress = (address, callback) => {
     encodeURIComponent(address) +
     "&key=" +
     key;
-  console.log("hello");
 
   request({ url, json: true }, (error, response) => {
+      console.log(response.body.status)
     if (error) {
-      callback("Unable to connect to the geocode server", undefined);
-      console.log("Unable to connect to the geocode server");
+      callback("Unable to connect to geocode server", undefined);
+      console.log("Unable to connect to geocode server");
     } else if (response.body.results.length === 0) {
       console.log("Unable to find location. Try another search");
       callback("Unable to find location. Try another search", undefined);
@@ -21,7 +21,7 @@ const getCoordinatesFromAddress = (address, callback) => {
       callback(undefined, {
         // address: response.body.results[0].formatted_address,
         lat: response.body.results[0].geometry.location.lat,
-        long: response.body.results[0].geometry.location.lng,
+        lng: response.body.results[0].geometry.location.lng,
       });
     }
   });

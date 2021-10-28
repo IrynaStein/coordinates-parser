@@ -1,7 +1,7 @@
 // const path = require('path')
 const getCoordinatesFromAddress = require("./utils/address");
+const getAddressFromCoordinates = require('./utils/coordinates')
 const express = require("express");
-const { URITooLong } = require("http-errors");
 const app = express();
 
 // app.get("", function (req, res) {
@@ -37,16 +37,25 @@ app.get("/coordinates", (req, res) => {
     return res.send("Address is required");
   }
 
-  getCoordinatesFromAddress(req.query.address, (error, { lat, long } = {}) => {
+  getCoordinatesFromAddress(req.query.address, (error, { lat, lng } = {}) => {
     if (error) {
       return res.send({ error: error });
     }
     res.send({
       lat,
-      long,
+      lng,
     });
   });
 });
+
+
+app.get("/address", (req, res) => {
+    if(!req.query.latlng){
+        return res.send("Coordinates are required")
+    }
+
+
+})
 
 app.get("/*", (req, res) => {
   res.send("404 Page not found");
