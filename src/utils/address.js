@@ -10,7 +10,7 @@ const getCoordinatesFromAddress = (address, callback) => {
 
   request({ url, json: true }, (error, response) => {
     if (error) {
-      callback("Unable to connect to geocode server", undefined);
+      callback("Unable to connect to geocoding server", undefined);
     } else if (response.body.results.length === 0) {
       callback("Unable to find location. Try another search", undefined);
     } else {
