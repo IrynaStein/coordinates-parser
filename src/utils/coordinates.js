@@ -8,14 +8,14 @@ const getAddressFromCoordinates = (coordinates, callback) => {
     "&key=" +
     key;
 
-  request({ url, json: true }, (error, response) => {
+  request({ url, json: true }, (error, {body}) => {
     if (error) {
       callback("Unable to connect to geocoding service", undefined);
-    } else if (response.body.results.length === 0) {
+    } else if (body.results.length === 0) {
       callback("Unable to find location. Try another search", undefined);
     } else {
       callback(undefined, {
-        address: response.body.results[0].formatted_address,
+        address: body.results[0].formatted_address,
       });
     }
   });

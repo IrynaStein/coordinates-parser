@@ -8,15 +8,16 @@ const getCoordinatesFromAddress = (address, callback) => {
     "&key=" +
     key;
 
-  request({ url, json: true }, (error, response) => {
+  request({ url, json: true }, (error, { body }) => {
     if (error) {
       callback("Unable to connect to geocoding server", undefined);
-    } else if (response.body.results.length === 0) {
+    } else if (body.results.length === 0) {
       callback("Unable to find location. Try another search", undefined);
     } else {
+      console.log("Requested address:", body.results[0].formatted_address);
       callback(undefined, {
-        lat: response.body.results[0].geometry.location.lat,
-        lng: response.body.results[0].geometry.location.lng,
+        lat: body.results[0].geometry.location.lat,
+        lng: body.results[0].geometry.location.lng,
       });
     }
   });
