@@ -2,6 +2,7 @@ const getCoordinatesFromAddress = require("./utils/address");
 const getAddressFromCoordinates = require("./utils/coordinates");
 const express = require("express");
 const app = express();
+const port = 5000
 
 app.get("/coordinates", (req, res) => {
   if (!req.query.address) {
@@ -12,7 +13,7 @@ app.get("/coordinates", (req, res) => {
     if (error) {
       return res.send({ error: error });
     }
-    res.send({
+    res.status(200).send({
       lat,
       lng,
     });
@@ -27,7 +28,7 @@ app.get("/address", (req, res) => {
     if (error) {
       return res.send({ error: error });
     }
-    res.send({
+    res.status(200).send({
       address,
     });
   });
@@ -37,6 +38,6 @@ app.get("/*", (req, res) => {
   res.send("404 Page not found");
 });
 
-app.listen(5000, ()=>{
-    console.log(`Server is running on port 5000`)
+app.listen(port, ()=>{
+    console.log(`Server is running on port ${port}`)
 });
